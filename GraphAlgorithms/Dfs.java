@@ -1,7 +1,10 @@
 package GraphAlgorithms;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
-class Dfs{
+class Dfs
+{
     static class Edge{
         int source;
         int dest;
@@ -51,5 +54,26 @@ class Dfs{
             Edge e=graph[cur].get(i);
             dfs(graph,e.dest,visited);
         }
+    }
+    public static void bfs(ArrayList<Edge> graph[], int V) 
+    {
+        boolean visited[] = new boolean[V];
+        Queue<Integer> q = new LinkedList<>();
+        q.add(0);
+        while(!q.isEmpty())
+        {
+            int curr = q.remove();
+            if(!visited[curr]) 
+            {
+                System.out.print(curr+" ");
+                visited[curr] = true;
+                for(int i=0; i<graph[curr].size(); i++) 
+                {
+                    Edge e = graph[curr].get(i);
+                    q.add(e.dest);
+                }
+            }
+        }
+        System.out.println();
     }
 }
