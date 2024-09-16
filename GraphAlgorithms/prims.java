@@ -37,7 +37,6 @@ class PrimsAlgorithm {
             this.v = v;
             this.wt = wt;
         }
-
         @Override
         public int compareTo(Pair p2) {
             return this.wt - p2.wt;
@@ -67,7 +66,7 @@ class PrimsAlgorithm {
 
     public static void main(String args[]) {
         int V = 4;
-        @SuppressWarnings("Unchecked")
+        @SuppressWarnings({ "Unchecked", "unchecked" })
         ArrayList<Edge> graph[] = new ArrayList[V];
         createGraph(graph);
         primAlgo(graph);

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-class Dfs
+class DfsBfs
 {
     static class Edge{
         int source;
