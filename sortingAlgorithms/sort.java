@@ -1,7 +1,7 @@
 package sortingAlgorithms;
-
 public class sort {
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         int[] arr = {20,10,40,30,60,50};
         // int[] ar = {10,20,30,40,50,60};
         sort s = new sort();
@@ -40,17 +40,14 @@ public class sort {
     {
         for(int i=0;i<arr.length-1;i++)
         {
-            int min=arr[i],minindex=i;
+            int min=i;
             for(int j=i+1;j<arr.length;j++)
             {
-                if(min>arr[j])
-                {
-                min=arr[j];
-                minindex=j;
-                }
+                if(arr[min]>arr[j])
+                min=j;
             }
-            int temp = arr[minindex];
-            arr[minindex]=arr[i];
+            int temp = arr[min];
+            arr[min]=arr[i];
             arr[i]=temp;
         }
     }
@@ -71,7 +68,7 @@ public class sort {
     {
         if(low<high)
         {
-        int mid = (low + high)/2;
+        int mid = low + (high-low)/2;
         mergeSort(arr, low, mid);
         mergeSort(arr, mid+1, high);
         merge(arr,low,mid,high);
@@ -99,8 +96,57 @@ public class sort {
         while (j < n2)
         arr[k++] = right[j++];
     }
-    void quickSort(int[] arr, int low,int high)
+void quicksort(int[] arr,int low,int high)
+{
+    if(low>=high)
+        return;
+    int s=low;
+    int e=high;
+    int m=s+(e-s)/2;
+    int pivot=arr[m];
+    while(s<=e)
     {
-        int mid = low + (high-low)/2;
+        while(arr[s]<pivot)
+            s++;
+        while(arr[e]>pivot)
+            e--;
+        if(s<=e)
+        {
+            int temp=arr[s];
+            arr[s]=arr[e];
+            arr[e]=temp;
+            s++;
+            e--;
+        }
     }
+    quicksort(arr,low,e);
+    quicksort(arr,s,high);
+}
+    // void quickSort(int[] arr, int low,int high)
+    // {
+    //     if(low<high)
+    //     {
+    //         int pi = partition(arr,low,high);
+    //         quickSort(arr, low, pi-1);
+    //         quickSort(arr, pi+1, high);
+    //     }
+    // }
+    // static int partition(int[] arr, int low, int high)
+    // {
+    //     int i=low-1,pivot=arr[high];
+    //     for(int j=low;j<high;j++)
+    //     {
+    //         if(arr[j]<=pivot)
+    //         {
+    //             i++;
+    //             int temp = arr[j];
+    //             arr[j]=arr[i];
+    //             arr[i]=temp;
+    //         }
+    //     int temp = arr[i + 1];
+    //     arr[i + 1] = arr[high];
+    //     arr[high] = temp;
+    //     }
+    //     return i+1;
+    // }
 }
