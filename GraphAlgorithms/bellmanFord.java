@@ -1,15 +1,13 @@
 package GraphAlgorithms;
-
 import java.util.*;
-
 public class bellmanFord {
     static class Edge {
-        int src, dest, weight;
+        int s, d, w;
         Edge(int src, int dest, int weight) 
         {
-            this.src = src;
-            this.dest = dest;
-            this.weight = weight;
+            this.s = src;
+            this.d= dest;
+            this.w = weight;
         }
     }
     public static void BellmanFord(List<Edge> edges, int V, int src){
@@ -21,14 +19,14 @@ public class bellmanFord {
         for (int i = 0; i < V - 1; i++){
             for (Edge edge : edges) 
             {
-                if (dist[edge.src] != Integer.MAX_VALUE && dist[edge.src] + edge.weight < dist[edge.dest]){
-                    dist[edge.dest] = dist[edge.src] + edge.weight;
-                    parent[edge.dest]=edge.src;
+                if (dist[edge.s] != Integer.MAX_VALUE && dist[edge.s] + edge.w < dist[edge.d]){
+                    dist[edge.d] = dist[edge.s] + edge.w;
+                    parent[edge.d]=edge.s;
                 }
             }
         }
         for (Edge edge : edges) {
-            if (dist[edge.src] != Integer.MAX_VALUE && dist[edge.src] + edge.weight < dist[edge.dest]) {
+            if (dist[edge.s] != Integer.MAX_VALUE && dist[edge.s] + edge.w< dist[edge.d]) {
                 System.out.println("Graph contains a negative weight cycle");
                 return;
             }
