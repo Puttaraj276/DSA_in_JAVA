@@ -44,10 +44,10 @@ public class examples{
     }
     public static int gcd(int n1,int n2)
     {
-        if(n2!=0)
-        return gcd(n2,n1%n2);
-        else 
+        if(n2==00)
         return n1;
+        else
+        return gcd(n2,n1%n2);
     }
     public static void toh(int n,char from,char to,char aux)
     {
