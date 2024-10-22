@@ -1,32 +1,43 @@
-package Imp;
-import java.util.List;
 import java.util.*;
-class infosys2nd{
-    public static int get_answer(int N, int K, List<Integer> A) {
-        if (K > N)
-            return 0;
-        int count = 0;
-        for (int i = 0; i < N; i++) {
-            Map<Integer, Integer> freqMap = new HashMap<>();
-            for (int j = i; j < N; j++) 
-            {
-                freqMap.put(A.get(j), freqMap.getOrDefault(A.get(j), 0) + 1);
-                if (isGoodSubArray(freqMap, K))
-                    count++;
+public class infosys2nd{
+    static final int MOD = 1000000007;
+    public static int gcd(int a, int b) {
+        while (b != 0) 
+        {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        return a;
+    }
+    public static int getAnswer(int N, List<Integer> A) {
+        int[][] dp = new int[N + 1][101];
+        dp[0][0] = 1;
+
+        for (int i = 1; i <= N; i++) {
+            for (int j = 0; j <= 100; j++) {
+                dp[i][j] = dp[i - 1][j];
+                int newGcd = gcd(j, A.get(i - 1));
+                dp[i][newGcd] = (dp[i][newGcd] + dp[i - 1][j]) % MOD;
             }
         }
-        return count;
-    }
-    public static boolean isGoodSubArray(Map<Integer, Integer> freqMap, int K) {
-        for (int count : freqMap.values())
-        {
-            if (count != K)
-                return false;
+
+        int result = 0;
+        for (int i = 1; i <= 100; i++) {
+            result = (result + dp[N][i]) % MOD;
         }
-        return true;
+
+        return result;
     }
+
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>(Arrays.asList(2,2,3,4,5));
-        System.out.println(get_answer(5, 2,list));
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        List<Integer> A = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            A.add(sc.nextInt());
+        }
+        sc.close();
+        System.out.println(getAnswer(N, A));
     }
 }

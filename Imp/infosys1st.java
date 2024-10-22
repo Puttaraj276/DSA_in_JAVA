@@ -1,6 +1,5 @@
-package Imp;
 import java.util.*;
-class infosys1st {
+class infosys1st{
     static int max3sum(List<Integer> list)
     {
         int sum=0;
